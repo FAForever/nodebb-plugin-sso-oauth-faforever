@@ -1,8 +1,8 @@
 {
-	"id": "nodebb-plugin-sso-oauth",
-	"name": "NodeBB OAuth SSO",
-	"description": "NodeBB Plugin that allows users to login/register via any configured OAuth provider.",
-	"url": "https://github.com/julianlam/nodebb-plugin-sso-oauth",
+	"id": "nodebb-plugin-sso-oauth-faforever",
+	"name": "NodeBB OAuth SSO plugin for faforever.com",
+	"description": "NodeBB Plugin that allows users to login/register the FAForever api.",
+	"url": "https://github.com/FAForever/nodebb-plugin-sso-oauth-faforever",
 	"library": "./library.js",
 	"hooks": [
 		{ "hook": "static:user.delete", "method": "deleteUserData" },

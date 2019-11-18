@@ -1,11 +1,11 @@
 {
-  "name": "nodebb-plugin-sso-oauth",
-  "version": "0.3.5",
-  "description": "NodeBB Generic OAuth SSO",
+  "name": "nodebb-plugin-sso-oauth-faforever",
+  "version": "0.3.4",
+  "description": "NodeBB OAuth SSO plugin for faforever.com",
   "main": "library.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/julianlam/nodebb-plugin-sso-oauth"
+    "url": "https://github.com/FAForever/nodebb-plugin-sso-oauth-faforever"
   },
   "keywords": [
     "nodebb",
@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/julianlam/nodebb-plugin-sso-oauth/issues"
+    "url": "https://github.com/FAForever/nodebb-plugin-sso-oauth-faforever/issues"
   },
   "readme": "",
   "readmeFilename": "README.md",
@@ -32,8 +32,8 @@
     "passport-oauth": "~1.0.0"
   },
   "nbbpm": {
-    "compatibility": "^1.0.1",
-    "index": false
+    "compatibility": "^1.13.0",
+    "index": true
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
