@@ -20,6 +20,7 @@
 	const Groups = require.main.require('./src/groups');
 	const db = require.main.require('./src/database');
 	const authenticationController = require.main.require('./src/controllers/authentication');
+	const userController = require.main.require('./src/controllers/user');
 
 	const async = require('async');
 
@@ -80,6 +81,28 @@
 	} else {
 		configOk = true;
 	}
+
+	OAuth.load = function (params, callback) {
+
+		var router = params.router;
+		var middleware = params.middleware;
+
+		// This actually creates the routes, you need two routes for every page.
+		// The first parameter is the actual path to your page.
+		router.get('/api/user/oauth/:externalUserId', middleware.checkAccountPermissions, async function(req, res, next) {
+            const userId = await db.getObjectField(constants.name + 'Id:uid', req.params['externalUserId']);
+			if (!userId) {
+				return next();
+			}
+            const userData = await userController.getUserDataByUID(req.uid, userId);
+
+			res.json(userData);
+		});
+
+		callback();
+	};
+
+
 
 	OAuth.getStrategy = function (strategies, callback) {
 		if (configOk) {
