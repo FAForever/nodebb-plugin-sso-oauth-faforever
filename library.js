@@ -62,7 +62,7 @@
 			tokenURL: nconf.get('oauth:tokenURL'),
 			clientID: nconf.get('oauth:id'),	// don't change this line
 			clientSecret: nconf.get('oauth:secret'),	// don't change this line
-			scope: nconf.get('oauth:scope')
+			scope: nconf.get('oauth:scope'),
 		},
 		userRoute: nconf.get('oauth:fafApiProfileURL'),	// This is the address to your app's "user profile" API endpoint (expects JSON)
 	});
@@ -83,25 +83,23 @@
 	}
 
 	OAuth.load = function (params, callback) {
-
 		var router = params.router;
 		var middleware = params.middleware;
 
 		// This actually creates the routes, you need two routes for every page.
 		// The first parameter is the actual path to your page.
-		router.get('/api/user/oauth/:externalUserId', middleware.checkAccountPermissions, async function(req, res, next) {
-            const userId = await db.getObjectField(constants.name + 'Id:uid', req.params['externalUserId']);
+		router.get('/api/user/oauth/:externalUserId', middleware.authenticateOrGuest, async function (req, res, next) {
+			const userId = await db.getObjectField(constants.name + 'Id:uid', req.params.externalUserId);
 			if (!userId) {
 				return next();
 			}
-            const userData = await userController.getUserDataByUID(req.uid, userId);
+			const userData = await userController.getUserDataByUID(req.uid, userId);
 
 			res.json(userData);
 		});
 
 		callback();
 	};
-
 
 
 	OAuth.getStrategy = function (strategies, callback) {
