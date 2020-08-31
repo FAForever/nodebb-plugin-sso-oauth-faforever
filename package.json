@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-sso-oauth-faforever",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "NodeBB OAuth SSO plugin for faforever.com",
   "main": "library.js",
   "repository": {
