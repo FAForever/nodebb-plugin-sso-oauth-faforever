@@ -112,6 +112,11 @@
 				opts.callbackURL = nconf.get('url') + '/auth/' + constants.name + '/callback';
 
 				passportOAuth.Strategy.prototype.userProfile = function (token, secret, params, done) {
+
+					// If your OAuth provider requires the access token to be sent in the query  parameters
+					// instead of the request headers, comment out the next line:
+					this._oauth._useAuthorizationHeaderForGET = true;
+
 					this._oauth.get(constants.userRoute, token, secret, function (err, body/* , res */) {
 						if (err) {
 							return done(err);
@@ -136,6 +141,11 @@
 				opts.callbackURL = nconf.get('url') + '/auth/' + constants.name + '/callback';
 
 				passportOAuth.Strategy.prototype.userProfile = function (accessToken, done) {
+
+					// If your OAuth provider requires the access token to be sent in the query  parameters
+					// instead of the request headers, comment out the next line:
+					this._oauth2._useAuthorizationHeaderForGET = true;
+
 					this._oauth2.get(constants.userRoute, accessToken, function (err, body/* , res */) {
 						if (err) {
 							return done(err);
