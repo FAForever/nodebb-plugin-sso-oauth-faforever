@@ -82,13 +82,14 @@
 		configOk = true;
 	}
 
+	// This adds a route to query forum users by their FAF id
 	OAuth.load = function (params, callback) {
 		var router = params.router;
 		var middleware = params.middleware;
 
 		// This actually creates the routes, you need two routes for every page.
 		// The first parameter is the actual path to your page.
-		router.get('/api/user/oauth/:externalUserId', middleware.authenticateOrGuest, async function (req, res, next) {
+		router.get('/api/user/oauth/:externalUserId', middleware.authenticateRequest, async function (req, res, next) {
 			const userId = await db.getObjectField(constants.name + 'Id:uid', req.params.externalUserId);
 			if (!userId) {
 				return next();
@@ -112,7 +113,6 @@
 				opts.callbackURL = nconf.get('url') + '/auth/' + constants.name + '/callback';
 
 				passportOAuth.Strategy.prototype.userProfile = function (token, secret, params, done) {
-
 					// If your OAuth provider requires the access token to be sent in the query  parameters
 					// instead of the request headers, comment out the next line:
 					this._oauth._useAuthorizationHeaderForGET = true;
@@ -141,7 +141,6 @@
 				opts.callbackURL = nconf.get('url') + '/auth/' + constants.name + '/callback';
 
 				passportOAuth.Strategy.prototype.userProfile = function (accessToken, done) {
-
 					// If your OAuth provider requires the access token to be sent in the query  parameters
 					// instead of the request headers, comment out the next line:
 					this._oauth2._useAuthorizationHeaderForGET = true;
