@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-sso-oauth-faforever",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "NodeBB OAuth SSO plugin for faforever.com",
   "main": "library.js",
   "repository": {
@@ -33,7 +33,7 @@
     "passport-oauth": "~1.0.0"
   },
   "nbbpm": {
-    "compatibility": "^1.19.0 || ^2.0.0",
+    "compatibility": "^2.0.0",
     "index": true
   },
   "devDependencies": {
