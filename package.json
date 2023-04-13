@@ -33,7 +33,7 @@
     "passport-oauth": "~1.0.0"
   },
   "nbbpm": {
-    "compatibility": "^1.19.0",
+    "compatibility": "^1.19.0 || ^2.0.0",
     "index": true
   },
   "devDependencies": {
