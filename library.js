@@ -20,6 +20,7 @@ const Groups = require.main.require('./src/groups');
 const db = require.main.require('./src/database');
 const authenticationController = require.main.require('./src/controllers/authentication');
 const userController = require.main.require('./src/controllers/user');
+const routeHelpers = require.main.require('./src/routes/helpers');
 
 const async = require('async');
 
@@ -82,13 +83,15 @@ if (!constants.name) {
 }
 
 // This adds a route to query forum users by their FAF id
-OAuth.load = function (params, callback) {
-	const router = params.router;
-	const middleware = params.middleware;
+OAuth.addRoutes = async ({ router, middleware }) => {
+	const middlewares = [
+		middleware.ensureLoggedIn,
+		middleware.admin.checkPrivileges,
+	];
 
 	// This actually creates the routes, you need two routes for every page.
 	// The first parameter is the actual path to your page.
-	router.get('/api/user/oauth/:externalUserId', middleware.authenticateRequest, async (req, res, next) => {
+	routeHelpers.setupApiRoute(router, 'get', '/sso/user/:externalUserId', middlewares, async (req, res, next) => {
 		const userId = await db.getObjectField(`${constants.name}Id:uid`, req.params.externalUserId);
 		if (!userId) {
 			return next();
@@ -97,8 +100,6 @@ OAuth.load = function (params, callback) {
 
 		res.json(userData);
 	});
-
-	callback();
 };
 
 OAuth.getStrategy = function (strategies, callback) {
@@ -245,7 +246,7 @@ OAuth.login = async (payload) => {
 
 		// Automatically confirm user email
 		await User.setUserField(uid, 'email', email);
-		await UserEmail.confirmByUid(uid);
+		await User.email.confirmByUid(uid);
 	}
 
 	// Save provider-specific information to the user

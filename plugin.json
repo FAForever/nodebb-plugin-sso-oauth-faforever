@@ -5,7 +5,7 @@
 	"url": "https://github.com/FAForever/nodebb-plugin-sso-oauth-faforever",
 	"library": "./library.js",
 	"hooks": [
-		{ "hook": "static:app.load", "method": "load" },
+		{ "hook": "static:api.routes", "method": "addRoutes" },
 		{ "hook": "static:user.delete", "method": "deleteUserData" },
 		{ "hook": "filter:user.whitelistFields", "method": "whitelistFields" },
 		{ "hook": "filter:auth.init", "method": "getStrategy" }
