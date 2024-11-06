@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-sso-oauth-faforever",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "NodeBB OAuth SSO plugin for faforever.com",
   "main": "library.js",
   "repository": {
@@ -29,19 +29,20 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "async": "^3.2.0",
-    "eslint": "^8.0.0",
     "passport-oauth": "~1.0.0"
   },
   "nbbpm": {
-    "compatibility": "^2.0.0",
+    "compatibility": "^3.0.0",
     "index": true
   },
   "devDependencies": {
     "@commitlint/config-angular": "15.0.0",
+    "eslint": "^9.0.0",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-plugin-import": "2.27.5",
-    "husky": "8.0.3",
-    "lint-staged": "13.1.0"
+    "eslint-config-nodebb": "^0.2.1",
+    "eslint-plugin-import": "^2.27.5",
+    "husky": "9.1.6",
+    "lint-staged": "15.2.10"
   },
   "husky": {
     "hooks": {
